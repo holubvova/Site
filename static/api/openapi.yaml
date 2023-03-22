@@ -2,14 +2,20 @@ openapi: 3.0.2
 info:
   title: Api Shops
   version: 1.0.0
-  description: API for Shops
+  description: API for Shops This site is a project for the course of web programming. 
+               The site is a shop for buying products.
+               Your can choose your product and buy it.
+  contact:
+    name: 'Volodymyr Holub'
+    email: 'v.holub@ukr.net'
+
 servers:
 - url: http://127.0.0.1:8000/
 paths:
   /apps/users/:
     get:
       operationId: listUsers
-      description: ''
+      description: 'Get  all user list'
       parameters: []
       responses:
         '200':
@@ -24,7 +30,7 @@ paths:
         - apps
     post:
       operationId: createUser
-      description: ''
+      description: 'Create new user'
       parameters: []
       requestBody:
         content:
@@ -43,13 +49,13 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/User'
-          description: ''
+          description: 'Good request'
       tags:
         - apps
   /apps/users/{id}/:
     get:
       operationId: retrieveUser
-      description: ''
+      description: 'get more details about user'
       parameters:
         - name: id
           in: path
@@ -63,7 +69,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/User'
-          description: ''
+          description: 'good request'
         '404':
           content:
             application/json:
@@ -77,7 +83,7 @@ paths:
         - apps
     put:
       operationId: updateUser
-      description: ''
+      description: 'Update user details'
       parameters:
         - name: id
           in: path
@@ -102,7 +108,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/User'
-          description: ''
+          description: 'Good request'
         '404':
           content:
             application/json:
@@ -127,7 +133,7 @@ paths:
         - apps
     patch:
       operationId: partialUpdateUser
-      description: ''
+      description: 'Partial Update User'
       parameters:
         - name: id
           in: path
@@ -152,12 +158,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/User'
-          description: ''
+          description: 'good request'
       tags:
         - apps
     delete:
       operationId: destroyUser
-      description: ''
+      description: 'Delete user'
       parameters:
         - name: id
           in: path
@@ -167,13 +173,13 @@ paths:
             type: string
       responses:
         '204':
-          description: ''
+          description: 'good delete request'
       tags:
         - apps
   /apps/products/:
     get:
       operationId: listProducts
-      description: ''
+      description: 'get all products list'
       parameters: []
       responses:
         '200':
@@ -183,12 +189,12 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/Product'
-          description: ''
+          description: 'all products list good request'
       tags:
         - apps
     post:
       operationId: createProduct
-      description: ''
+      description: 'Create new product'
       parameters: []
       requestBody:
         content:
@@ -207,7 +213,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Product'
-          description: ''
+          description: 'good request'
         '400':
           content:
             application/json:
@@ -222,7 +228,7 @@ paths:
   /apps/products/{id}/:
     get:
       operationId: retrieveProduct
-      description: ''
+      description: 'get more details about product'
       parameters:
         - name: id
           in: path
@@ -236,7 +242,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Product'
-          description: ''
+          description: 'good request'
         '404':
           content:
             application/json:
@@ -259,7 +265,7 @@ paths:
         - apps
     put:
       operationId: updateProduct
-      description: ''
+      description: 'Update product details'
       parameters:
         - name: id
           in: path
@@ -284,7 +290,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Product'
-          description: ''
+          description: 'good request'
         '400':
           content:
             application/json:
@@ -298,7 +304,7 @@ paths:
         - apps
     patch:
       operationId: partialUpdateProduct
-      description: ''
+      description: 'Partial Update Product'
       parameters:
         - name: id
           in: path
@@ -323,12 +329,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Product'
-          description: ''
+          description: 'good request'
       tags:
         - apps
     delete:
       operationId: destroyProduct
-      description: ''
+      description: 'delete product'
       parameters:
         - name: id
           in: path
@@ -338,13 +344,13 @@ paths:
             type: string
       responses:
         '204':
-          description: ''
+          description: 'good delete request'
       tags:
         - apps
   /apps/orders/:
     get:
       operationId: listOrders
-      description: ''
+      description: 'get all orders list'
       parameters: []
       responses:
         '200':
@@ -359,7 +365,7 @@ paths:
         - apps
     post:
       operationId: createOrder
-      description: ''
+      description: 'create new order'
       parameters: []
       requestBody:
         content:
@@ -378,7 +384,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Order'
-          description: ''
+          description: 'good request'
         '404':
           content:
             application/json:
@@ -402,7 +408,7 @@ paths:
   /apps/orders/{id}/:
     get:
       operationId: retrieveOrder
-      description: ''
+      description: 'get more details about order'
       parameters:
         - name: id
           in: path
@@ -416,7 +422,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Order'
-          description: ''
+          description: 'good request'
         '404':
           content:
             application/json:
@@ -439,7 +445,7 @@ paths:
         - apps
     put:
       operationId: updateOrder
-      description: ''
+      description: 'update order details'
       parameters:
         - name: id
           in: path
@@ -464,7 +470,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Order'
-          description: ''
+          description: 'good request'
         '404':
           content:
             application/json:
@@ -487,7 +493,7 @@ paths:
         - apps
     patch:
       operationId: partialUpdateOrder
-      description: ''
+      description: 'partial update order details'
       parameters:
         - name: id
           in: path
@@ -512,12 +518,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Order'
-          description: ''
+          description: 'good request'
       tags:
         - apps
     delete:
       operationId: destroyOrder
-      description: ''
+      description: 'delete order'
       parameters:
         - name: id
           in: path
@@ -527,7 +533,7 @@ paths:
             type: string
       responses:
         '204':
-          description: ''
+          description: 'good delete request'
         '404':
           content:
             application/json:
@@ -551,7 +557,7 @@ paths:
   /apps/orderitems/:
     get:
       operationId: listOrderItems
-      description: ''
+      description: 'get all order items list'
       parameters: []
       responses:
         '200':
@@ -561,7 +567,7 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/OrderItem'
-          description: ''
+          description: 'good request'
         '404':
           content:
             application/json:
@@ -584,7 +590,7 @@ paths:
         - apps
     post:
       operationId: createOrderItem
-      description: ''
+      description: 'Create a new order item'
       parameters: []
       requestBody:
         content:
@@ -603,7 +609,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/OrderItem'
-          description: ''
+          description: 'successful operation'
         '404':
           content:
             application/json:
@@ -627,7 +633,7 @@ paths:
   /apps/orderitems/{id}/:
     get:
       operationId: retrieveOrderItem
-      description: ''
+      description: 'retrieve order item details'
       parameters:
         - name: id
           in: path
@@ -641,7 +647,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/OrderItem'
-          description: ''
+          description: 'successful operation'
         '404':
           content:
             application/json:
