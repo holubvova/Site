@@ -46,7 +46,6 @@ class ProductViewSet(viewsets.ModelViewSet):
         Product.objects.create(name=name, price=price, description=description, digital=digital, image=image)
         return Response(status=status.HTTP_201_CREATED)
 
-
 class ShippingAddressSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = ShippingAddress

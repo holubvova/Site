@@ -1,17 +1,19 @@
 import datetime
 import json
 
-from django.http import JsonResponse
+from django.http import JsonResponse, HttpResponseRedirect
 from django.shortcuts import render, redirect
 from django.contrib.auth.views import LoginView, LogoutView
 from django.contrib import messages
 from django.urls import reverse_lazy
+
 from django.views.generic import CreateView, ListView, UpdateView
 from apps.forms import RegisterForm, User, UpdateProfileForm, ShippingAddressForm
 from django.utils.decorators import method_decorator
 from django.contrib.auth.decorators import login_required
 from apps.models import Product, Order, OrderItem, ShippingAddress
-
+from chat.models import ConnectedUsers
+from django.contrib.auth import logout as auth_logout
 
 def index(request):
     # if request.user.is_authenticated:
@@ -58,6 +60,8 @@ def UpdateItem(request):
     return JsonResponse('Item was added', safe=False)
 
 
+
+
 def Cart(request):
     if request.user.is_authenticated:
         customer = request.user
@@ -93,8 +97,6 @@ def Checkout(request):
                 order.transaction_id = transaction_id
                 order.complete = True
                 order.save()
-
-
                 ShippingAddress.objects.create(customer=customer,
                                                order=order,
                                                address=request.POST['address'],
@@ -130,6 +132,7 @@ class Login(LoginView):
     template_name = 'apps/login.html'
 
     def get_success_url(self):
+        ConnectedUsers.objects.create(first_name=self.request.user.username)
         return reverse_lazy('main')
 
     def form_invalid(self, form):
@@ -174,6 +177,17 @@ class UpdateProfileView(UpdateView):
 
 class Logout(LogoutView):
     template_name = "registration/logged_out.html"
+    def post(self, request, *args, **kwargs):
+        """Logout may be done via POST."""
+
+        auth_logout(request)
+        redirect_to = self.get_success_url()
+        if redirect_to != request.get_full_path():
+            # Redirect to target page once the session has been cleared.
+            return HttpResponseRedirect(redirect_to)
+        return super().get(request, *args, **kwargs)
+
+
 
 
 def AboutPageView(request):
@@ -181,3 +195,9 @@ def AboutPageView(request):
 
 def redoc(request):
     return render(request=request, template_name='redoc/redoc.html')
+
+
+
+def users_online(request):
+    users = ConnectedUsers.objects.all()
+    return render(request=request, template_name='apps/users_online.html', context={'users': users})

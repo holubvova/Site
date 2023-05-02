@@ -26,4 +26,5 @@ urlpatterns = [
     path('', include('apps.urls')),
     path('api-auth/', include('rest_framework.urls')),
     path('redoc/', get_schema_view(title="My API", description="API for all things …", version="1.0.0"), name='redoc-schema'),
+    path('chat/', include('chat.urls')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

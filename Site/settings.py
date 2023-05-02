@@ -38,7 +38,8 @@ INSTALLED_APPS = [
     'apps',
     'bootstrap5',
     'rest_framework',
-
+    'channels',
+    'chat',
 
 
 ]
@@ -72,6 +73,7 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'Site.wsgi.application'
+ASGI_APPLICATION = "Site.asgi.application"
 
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
@@ -134,3 +136,18 @@ LOGIN_REDIRECT_URL = 'main'
 LOGOUT_REDIRECT_URL = 'login'
 
 AUTH_USER_MODEL = "apps.User"
+
+
+# Redis
+CHANNEL_LAYERS = {
+    'default': {
+        'BACKEND': 'channels_redis.core.RedisChannelLayer',
+        'CONFIG': {
+            "hosts": [('127.0.0.1', 6379)],
+        },
+    },
+}
+
+
+
+
