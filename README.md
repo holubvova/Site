@@ -10,4 +10,4 @@
 
 Інструменти розробки: Python 3, Django, Celery, redis, Pycharm Community Edition
 
-Docs: [https://docs.google.com/document/d/1X4R9-CqX8hN1_aTvQRZs3zp4sfZYfvMk/edit](https://docs.google.com/document/d/1UdVMUTkSpbfCvJh5Rv8nFj_e8PZQ8y0R/edit?usp=sharing&ouid=104830673419260175104&rtpof=true&sd=true)
+Docs: https://docs.google.com/document/d/1JBRFRPnzGt4Z2gIfwl0YCDz_EvIi3y6eVhTMH4eJx7c/edit
