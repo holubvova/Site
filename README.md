@@ -2,12 +2,12 @@
 
 Предмет:  Технологія розробки  Web-додатків.
 
-Тема : Розробка серверної частини Web-додатка.
+Тема : Організація виконання асинхронних задач Web-додатка.
 
-Мета: навчитись користуватись засобами фреймворка Python/Django, Django REST Framework та утилітою Postman.
+Мета: навчитись користуватись засобами бібліотеки Python/Celery щодо організації асинхронного виконання задач Web-додатка.
 
-Загальне завдання: розробити серверну частину Web-додатку та протестувати її функціональність.
+Загальне завдання: розробити функції щодо виконання асинхронних задач Web-додатка за допомогою бібліотеки Celery.
 
-Інструменти розробки: Python 3, Django, Django REST Framework, Postman, Pycharm Community Edition
+Інструменти розробки: Python 3, Django, Celery, redis, Pycharm Community Edition
 
-Docs: https://docs.google.com/document/d/1X4R9-CqX8hN1_aTvQRZs3zp4sfZYfvMk/edit
+Docs: https://docs.google.com/document/d/1JBRFRPnzGt4Z2gIfwl0YCDz_EvIi3y6eVhTMH4eJx7c/edit
