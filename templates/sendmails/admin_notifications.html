@@ -1,0 +1,43 @@
+{% extends 'apps/index.html' %}
+{% load static %}
+<!DOCTYPE html>
+<html>
+
+
+{% block chat %}
+    <div class="container mt-3 p-5 card">
+        <h1>Admin notifications</h1>
+        <br>
+        <div class="card">
+            <table class="table " id="admin-notifications-table">
+                <thead>
+                <tr>
+                    <th>Queue</th>
+                    <th>Subject</th>
+                    <th>Data</th>
+                    <th>Recipient</th>
+                    <th>Status</th>
+                    <th>Date complate</th>
+                </tr>
+                </thead>
+
+                <tbody>
+
+                </tbody>
+            </table>
+        </div>
+        <script>
+            const socket = new WebSocket(`ws://${window.location.host}/ws/admin_notifications/`);
+
+            socket.onmessage = function (e) {
+                const data = JSON.parse(e.data);
+
+                console.log(data);
+                const row ='<tr><td>' + data["queue"] + '</td><td>' + data["name"] + '</td><td>' + data["data"]  +'</td><td>' + data["recipient"] + '</td><td>' + data["result"] + '</td><td>' + data["timestamp"] + '</td></td>';
+                const table = document.getElementById('admin-notifications-table');
+                table.insertAdjacentHTML('beforeend', row);
+            };
+        </script>
+    </div>
+{% endblock %}
+</html>

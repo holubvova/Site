@@ -59,7 +59,23 @@
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
             <div class="   navbar-nav ms-auto mb-3 mb-lg-1 ">
                 {% if user.is_superuser %}
-                    <a class="nav-link" href="{% url 'online' %}">Online_Users</a>
+                      <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                           aria-expanded="false">
+                            Menu
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="{% url 'group' %}">Create group</a></li>
+                            <li><a class="dropdown-item" href="{% url 'online' %}">Online_Users</a></li>
+                            <li><a class="dropdown-item" href="{% url 'notification' %}">Create Notifications</a></li>
+                            <li><a class="dropdown-item" href="{% url 'admin_notifications' %}">Status Notifications</a></li>
+
+
+                        </ul>
+                    </li>
+
+
+
                 {% endif %}
 
                 <a class="nav-link" aria-current="page" href="{% url 'main' %}">Home</a>

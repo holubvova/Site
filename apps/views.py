@@ -2,18 +2,23 @@ import datetime
 import json
 
 from django.http import JsonResponse, HttpResponseRedirect
-from django.shortcuts import render, redirect
+from django.shortcuts import redirect
 from django.contrib.auth.views import LoginView, LogoutView
 from django.contrib import messages
 from django.urls import reverse_lazy
 
 from django.views.generic import CreateView, ListView, UpdateView
 from apps.forms import RegisterForm, User, UpdateProfileForm, ShippingAddressForm
-from django.utils.decorators import method_decorator
-from django.contrib.auth.decorators import login_required
+
 from apps.models import Product, Order, OrderItem, ShippingAddress
 from chat.models import ConnectedUsers
 from django.contrib.auth import logout as auth_logout
+
+
+from sendmails.tasks_sendmail import *
+
+from django.shortcuts import render
+
 
 def index(request):
     # if request.user.is_authenticated:
@@ -103,6 +108,17 @@ def Checkout(request):
                                                city=request.POST['city'],
                                                phone=request.POST['phone']
                                                )
+                Subject = 'Site Shop'
+                message = f'Your order has been placed successfully\n' \
+                          f'Your order number is {transaction_id}\n' \
+                          f'Your order will be delivered within 3 days\n' \
+                          f'Your total amount is {total}\n' \
+                          f'Manager will contact you to clarify the order'
+
+                recipient = [request.user.email]
+                # send_maill(subject=Subject, message=message, email=recipient, cc_email=None)
+                task_send_mail.delay(subject=Subject, message=message, email=recipient)
+                # task_send_mail.apply_async(args=[recipient,message, Subject])
                 return redirect('main')
 
     # if request.method == 'GET':

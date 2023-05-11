@@ -1,0 +1,45 @@
+{% extends 'base/base.html' %}
+
+{% block title %}
+
+Group
+{% endblock %}
+
+
+{% block content %}
+    <div class="container-fluid ">
+        <div class="row" style="margin: 1%"></div>
+        <div class="row">
+            <div class="col"></div>
+
+            <div class="col-md-3  rounded justify-content-center  ">
+                <div class="card card-body" style="background-color:#e3ffff">
+                    <form name="Sign_in" method="post">
+                        {% csrf_token %}
+                        <div class="mb-md-3 d-grid gap-2 ">
+                            {{ form }}
+                        </div>
+                        <div class="d-grid gap-2">
+                            <button type="submit" class="btn btn-primary  bt btn-block">Save</button>
+                        </div>
+                                                <p class="text-center">Create notification for group <a href="{% url 'notification' %}">Create</a></p>
+                        {#                        <p class="text-center">Don't have a account? <a href="{% url 'signup' %}">Sing Up</a></p>#}
+                    </form>
+
+{#                    <h4>Groups:</h4>#}
+{#                    <ul>#}
+{#                        {% for group in groups %}#}
+{#                            <li>{{ group.name }}</li>#}
+{#                            <ul>#}
+{#                                {% for user in group.user_set.all %}#}
+{#                                    <li>{{ user.username }}</li>#}
+{#                                {% endfor %}#}
+{#                            </ul>#}
+{#                        {% endfor %}#}
+{#                    </ul>#}
+                </div>
+            </div>
+            <div class="col"></div>
+        </div>
+    </div>
+{% endblock %}

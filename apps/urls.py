@@ -27,4 +27,5 @@ urlpatterns = [
     path('apps/', include(router.urls)),
     path('redoc/', redoc, name='redoc'),
     path('online/', users_online, name='online'),
+
 ]

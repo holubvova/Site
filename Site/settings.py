@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'channels',
     'chat',
+    'sendmails'
 
 
 ]
@@ -52,6 +53,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    # 'channels.middleware.WebSocketMiddleware',
 ]
 
 ROOT_URLCONF = 'Site.urls'
@@ -149,5 +151,19 @@ CHANNEL_LAYERS = {
 }
 
 
+CELERY_BROKER_URL = 'redis://127.0.0.1:6379'+'/0'
+# CELERY_RESULT_BACKEND = 'django-db'#new
+# CELERY_CACHE_BACKEND = 'django-cache' #new
+CELERY_ACCEPT_CONTENT = ['application/json']
+CELERY_RESULT_SERIALIZER = 'json'
+CELERY_TASK_SERIALIZER = 'json'
+BROKER_TRANSPORT_OPTIONS = {'visibility_timeout': 3600}
+CELERY_RESULT_BACKEND = 'redis://127.0.0.1:6379' + '/0'
+CELERY_IMPORTS = ('sendmails.tasks_sendmail', 'sendmails.long_task')
 
-
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_USE_TLS = True
+EMAIL_PORT = 587
+EMAIL_HOST_USER = 'hm1haha1hm@gmail.com'
+EMAIL_HOST_PASSWORD = 'ibmgodpsugyyompb'
