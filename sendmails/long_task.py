@@ -2,7 +2,8 @@ from asgiref.sync import async_to_sync
 from channels.layers import get_channel_layer
 
 from Site.celery import app
-from .notificationwork  import *
+from .notificationwork import *
+
 
 @app.task(queue='long_task')
 def sendmail_1h():
@@ -16,9 +17,9 @@ def sendmail_1h():
                 "queue": "long_task",
                 "name": f"{result['name']}",
                 "data": f"{result['data']}",
-                "recipient" :f"{result['recipient']}",
+                "recipient": f"{result['recipient']}",
                 "result": f"{result['result']}",
-                "timestamp":f"{result['timestamp']}"
+                "timestamp": f"{result['timestamp']}"
             }
         },
     )
@@ -34,8 +35,10 @@ def sendmail_3h():
         {
             "type": "admin.notifications",
             "message": {
+                "queue": "long_task",
                 "name": f"{result['name']}",
                 "data": f"{result['data']}",
+                "recipient": f"{result['recipient']}",
                 "result": f"{result['result']}",
                 "timestamp": f"{result['timestamp']}"
             }
@@ -53,8 +56,10 @@ def sendmail_12h():
         {
             "type": "admin.notification",
             "message": {
+                "queue": "long_task",
                 "name": f"{result['name']}",
                 "data": f"{result['data']}",
+                "recipient": f"{result['recipient']}",
                 "result": f"{result['result']}",
                 "timestamp": f"{result['timestamp']}"
             }

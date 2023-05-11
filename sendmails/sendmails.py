@@ -25,8 +25,9 @@ def send_maill(email,  message:str, subject:str):
         msg.send(fail_silently=False)
         # print(email, message, subject)
         status = "success"
-    except:
-        status = "error"
+    except Exception as e:
+        status = f"error{e}"
+        print(e)
 
     return {
         "queue": "email",

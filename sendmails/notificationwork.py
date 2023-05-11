@@ -47,10 +47,9 @@ class scheduler:
             try:
                 send_mass_mail((message,), fail_silently=False)
                 self.status = "success"
-
-            except:
-                print("error")
-                self.status = "error"
+            except Exception as e:
+                self.status = f"error{e}"
+                print(e)
 
         return {
             "queue": "long_task",

@@ -26,7 +26,7 @@ app.conf.beat_schedule = {
     'cron_tabs-1-hour':
         {
             'task': 'sendmails.long_task.sendmail_1h',
-            'schedule': crontab( minute='*/5'),
+            'schedule': crontab(minute=0, hour='*/1'),
         },
     'cron_tabs-3-hour':
         {
