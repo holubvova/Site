@@ -1,13 +1,13 @@
 from django.contrib.auth.decorators import login_required
 from django.urls import path, include
+
+from apps.router import router
+# from rest_framework import routers
+
 from apps.views import *
 from apps.models import User
 from django.urls import include, path
-from apps.serializers import router
-
-
-
-
+from apps.serializers import  ProductViewSet, OrderViewSet, OrderItemViewSet, ShippingAddressViewSet
 
 # Wire up our API using automatic URL routing.
 # Additionally, we include login URLs for the browsable API.
@@ -15,17 +15,20 @@ from apps.serializers import router
 
 urlpatterns = [
     path('', index, name="main"),
-    path('login/', Login.as_view(), name='login'),
+    path('login/', Login.as_view(), name='login_site'),
     path('singup/', SingUpView.as_view(), name='signup'),
     path('profile/', login_required(PorfileView.as_view()), name='profile'),
     path('edit/<int:pk>', login_required(UpdateProfileView.as_view()), name='edit'),
     path('about/', AboutPageView, name='about'),
-    path('logout/', Logout.as_view(), name='logout'),
+    path('logout/', Logout.as_view(), name='logout_site'),
     path('cart/', Cart, name='cart'),
     path('chekout/', Checkout, name='checkout'),
     path('update_item/', UpdateItem, name='update_item'),
     path('apps/', include(router.urls)),
+    # path('apps/users/', UserViewSet.as_view(), name='users'),
+
     path('redoc/', redoc, name='redoc'),
     path('online/', users_online, name='online'),
 
 ]
+

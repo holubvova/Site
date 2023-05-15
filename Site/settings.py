@@ -40,8 +40,9 @@ INSTALLED_APPS = [
     'rest_framework',
     'channels',
     'chat',
-    'sendmails'
-
+    'sendmails',
+    'rest_framework.authtoken',
+    'djoser',
 
 ]
 
@@ -53,6 +54,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    # 'corsheaders.middleware.CorsMiddleware'
     # 'channels.middleware.WebSocketMiddleware',
 ]
 
@@ -123,22 +125,19 @@ USE_TZ = True
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [BASE_DIR / 'static']
 
-
 MEDIA_URL = '/image/products/'
-MEDIA_ROOT = os.path.join(BASE_DIR,'static/image/products')
-
+MEDIA_ROOT = os.path.join(BASE_DIR, 'static/image/products')
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-LOGIN_URL = 'login'
+LOGIN_URL = 'login_site'
 LOGIN_REDIRECT_URL = 'main'
-LOGOUT_REDIRECT_URL = 'login'
+LOGOUT_REDIRECT_URL = 'login_site'
 
 AUTH_USER_MODEL = "apps.User"
-
 
 # Redis
 CHANNEL_LAYERS = {
@@ -150,8 +149,7 @@ CHANNEL_LAYERS = {
     },
 }
 
-
-CELERY_BROKER_URL = 'redis://127.0.0.1:6379'+'/0'
+CELERY_BROKER_URL = 'redis://127.0.0.1:6379' + '/0'
 # CELERY_RESULT_BACKEND = 'django-db'#new
 # CELERY_CACHE_BACKEND = 'django-cache' #new
 CELERY_ACCEPT_CONTENT = ['application/json']
@@ -167,3 +165,13 @@ EMAIL_USE_TLS = True
 EMAIL_PORT = 587
 EMAIL_HOST_USER = 'hm1haha1hm@gmail.com'
 EMAIL_HOST_PASSWORD = 'ibmgodpsugyyompb'
+
+
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework.authentication.TokenAuthentication',
+        'rest_framework.authentication.SessionAuthentication',
+        'rest_framework.authentication.BasicAuthentication'
+    ),
+}

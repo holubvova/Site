@@ -83,7 +83,7 @@
                 <a class="nav-link" href="{% url 'cart' %}">Cart</a>
                 <a class="nav-link" href="{% url 'about' %}">About</a>
                 {% if  user.is_anonymous %}
-                    <a class="nav-link" href="{% url 'login' %}">Login</a>
+                    <a class="nav-link" href="{% url 'login_site' %}">Login</a>
                 {% else %}
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
@@ -93,7 +93,7 @@
                         <ul class="dropdown-menu">
                             <li><a class="dropdown-item" href="{% url 'profile' %}">Profile</a></li>
                             {% if  user.is_authenticated  and  not user.is_anonymous %}
-                                <li><a class="dropdown-item" href="{% url 'logout' %}">logout</a></li>
+                                <li><a class="dropdown-item" href="{% url 'logout_site' %}">logout</a></li>
                             {% else %}
                                 <li><a class="dropdown-item" href="">login</a></li>
                             {% endif %}

@@ -8,6 +8,11 @@ from django.contrib import messages
 from django.urls import reverse_lazy
 
 from django.views.generic import CreateView, ListView, UpdateView
+from rest_framework import viewsets
+from rest_framework.permissions import IsAuthenticated
+from rest_framework.views import APIView
+from apps.serializers import UserSerializer
+
 from apps.forms import RegisterForm, User, UpdateProfileForm, ShippingAddressForm
 
 from apps.models import Product, Order, OrderItem, ShippingAddress
@@ -18,6 +23,19 @@ from django.contrib.auth import logout as auth_logout
 from sendmails.tasks_sendmail import *
 
 from django.shortcuts import render
+
+class UserViewSet(viewsets.ModelViewSet):
+    queryset = User.objects.all()
+    serializer_class = UserSerializer
+    permission_classes = (IsAuthenticated,)
+
+    def get(self, request):
+        user = User.objects.all()
+        serializer = UserSerializer(user, many=True)
+        return JsonResponse(serializer.data, safe=False)
+
+
+
 
 
 def index(request):
@@ -161,7 +179,7 @@ class SingUpView(CreateView):
     template_name = 'apps/registration.html'
 
     def get_success_url(self):
-        return reverse_lazy('login')
+        return reverse_lazy('login_site')
 
 
 # @method_decorator(login_required, name="dispatch")
